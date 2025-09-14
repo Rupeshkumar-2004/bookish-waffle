@@ -1,0 +1,7 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.hero-section {
+    background: linear-gradient(to right, rgba(2, 86, 153, 0.9), rgba(41, 142, 208, 0.9)), url('https://placehold.co/1920x1080/e2e8f0/e2e8f0?text=') no-repeat center center/cover;
+}
