@@ -1,104 +1,75 @@
-#include "crow.h"
+#include "include/JobPortal.h"
 #include <iostream>
-#include "include/load.hpp"
+#include <sstream>
+#include <limits>
 
-int main() {
-    try {
-        hashTables table;
 
-        crow::mustache::set_base("templates");
+void Menu(){
+    cout<<"\n   JOB PORTAL.....\n";
+    cout<<"DATA STRUCTURE USED AND THIER DEMONSTRATIONS:\n";
+    cout<<"1. Trie - Job Title Autocomplete\n";
+    cout<<"2. Graph - Skill Relationships (BFS/DFS)\n";
+    cout<<"3. Priority Queue - Urgent Jobs (Heap)\n";
+    cout<<"4. AVL Tree - Wage Range Search\n";
+    cout<<"5. Linked List - Worker Management\n";
+    cout<<"6. Hash Table - Location-based Search\n";
+    cout<<endl;
+    cout<<"7. Post New Job\n";
+    cout<<"8. Register Worker\n";
+    cout<<"9. Show All Data Structures Info\n";
+    cout<<"10. Load Sample Data\n";
+    cout<<"0. Exit\n";
+    cout<<"Choice: ";
+}
 
-        crow::SimpleApp app;
+int main(){
+    JobPortal portal;
 
-        // Home route
-        CROW_ROUTE(app, "/")([]() {
-            auto page = crow::mustache::load("welcome.html");
-            return page.render();
-        });
+    int choice;
+    while(true){
+        Menu();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        // Login page
-        CROW_ROUTE(app, "/loginpage")([]() {
-            auto page = crow::mustache::load("login.html");
-            return page.render();
-        });
-
-        // Login POST
-        CROW_ROUTE(app, "/login_post").methods("POST"_method)([&table](const crow::request& req) -> crow::response {
-            auto req_body = crow::query_string(("?" + req.body).c_str());
-
-            std::string email = req_body.get("email");
-            std::string pass  = req_body.get("password");
-            std::string role  = req_body.get("role");
-
-            std::string* user = table.findUsername(email);
-
-            if (user) {
-                if (role == "user") {
-                    user_data* data = table.findUser(*user);
-                    if (data && data->password == pass) {
-                        crow::mustache::context ctx;
-                        ctx["user_name"] = data->username;
-
-                        auto page = crow::mustache::load("user_dashboard.html");
-                        return crow::response(page.render(ctx));
-                    }
-                }
-                else if (role == "company") {
-                    company_data* data = table.findCompany(*user);
-                    if (data && data->password == pass) {
-                        crow::mustache::context ctx;
-                        ctx["company_name"] = data->username;
-
-                        auto page = crow::mustache::load("company_dashboard.html");
-                        return crow::response(page.render(ctx));
-                    }
-                }
-                return crow::response("NO SUCH USER");
-            }
-            return crow::response("NO SUCH USER");
-        });
-
-        // Signup page
-        CROW_ROUTE(app, "/signup")([]() {
-            auto page = crow::mustache::load("signup.html");
-            return page.render();
-        });
-
-        // Signup POST
-        CROW_ROUTE(app, "/signup_post").methods("POST"_method)([&table](const crow::request& req) -> crow::response {
-            auto req_body = crow::query_string(("?" + req.body).c_str());
-
-            std::string name     = req_body.get("fullname");
-            std::string username = req_body.get("username");
-            std::string email    = req_body.get("email");
-            std::string pass     = req_body.get("password");
-            std::string role     = req_body.get("role");
-
-            if (role == "user") {
-                user_data* new_user = new user_data(name, username, email, pass);
-                table.addUser(new_user);
-                auto page = crow::mustache::load("user_dashboard.html");
-                return crow::response(page.render());
-            }
-            else {
-                company_data* new_company = new company_data(name, username, email, pass);
-                table.addCompany(new_company);
-                auto page = crow::mustache::load("company_dashboard.html");
-                return crow::response(page.render());
-            }
-        });
-
-        // Route from signup → login
-        CROW_ROUTE(app, "/signToLoginpage")([]() {
-            auto page = crow::mustache::load("login.html");
-            return page.render();
-        });
-
-        std::cout << "Server running at http://localhost:18080\n";
-
-        app.port(18080).multithreaded().run();
+        switch(choice){
+            case 1:
+                portal.searchJobsByPrefix();
+                break;
+            case 2:
+                portal.findRelatedSkills();
+                break;
+            case 3:
+                portal.UrgentJobs();
+                break;
+            case 4:
+                portal.JobsByWageRange();
+                break;
+            case 5:
+                portal.searchJobsByLocation();
+                break;
+            case 6:
+                portal.displayAllWorkers();
+                break;
+            case 7:
+                portal.postJob();
+                break;
+            case 8:
+                portal.registerWorker();
+                break;
+            case 9:
+                portal.demonstrateAllDataStructures();
+                break;
+            case 10:
+                portal.setupSampleData();
+                break;
+            case 0:
+                cout<<"\n Thank you for using this website..."<<endl;
+                return 0 ;
+            default:
+                cout<<"Invalid choice ...!!!"<<endl;
+        }
+        cout << "\nPress Enter to continue...";
+        cin.get();
     }
-    catch (const std::exception& e) {
-        std::cerr << "[ERROR] Exception: " << e.what() << std::endl;
-    }
+
+    return 0;
 }
