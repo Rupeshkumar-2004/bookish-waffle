@@ -69,11 +69,11 @@ void JobPortal::postJob(){
 
     size_t pos=0;
         while((pos = skill.find(','))!=string::npos) {
-            string skill = skill.substr(0, pos);
-            skill.erase(0,skill.find_first_not_of(" \t"));
-            skill.erase(skill.find_last_not_of(" \t")+1);
-            if(!skill.empty()){
-                job.requiredSkills.push_back(skill);
+            string token = skill.substr(0, pos);
+            token.erase(0,token.find_first_not_of(" \t"));
+            token.erase(token.find_last_not_of(" \t")+1);
+            if(!token.empty()){
+                job.requiredSkills.push_back(token);
             }
             skill.erase(0,pos+1);
         }
@@ -118,11 +118,11 @@ void JobPortal::registerWorker(){
         
         size_t pos=0;
         while((pos=skill.find(','))!=string::npos){
-            string skill=skill.substr(0,pos);
-            skill.erase(0,skill.find_first_not_of(" \t"));
-            skill.erase(skill.find_last_not_of(" \t")+1);
-            if(!skill.empty()){
-                newWorker.skills.push_back(skill);
+            string token=skill.substr(0,pos);
+            token.erase(0,token.find_first_not_of(" \t"));
+            token.erase(token.find_last_not_of(" \t")+1);
+            if(!token.empty()){
+                newWorker.skills.push_back(token);
             }
             skill.erase(0,pos+1);
         }

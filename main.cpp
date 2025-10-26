@@ -28,6 +28,13 @@ int main(){
     int choice;
     while(true){
         Menu();
+        if(!(cin>>choice)){
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid input. Please enter a number.\n";
+            continue;
+        }
+
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         switch(choice){
@@ -44,10 +51,10 @@ int main(){
                 portal.JobsByWageRange();
                 break;
             case 5:
-                portal.searchJobsByLocation();
+                portal.displayAllWorkers();
                 break;
             case 6:
-                portal.displayAllWorkers();
+                portal.searchJobsByLocation();
                 break;
             case 7:
                 portal.postJob();

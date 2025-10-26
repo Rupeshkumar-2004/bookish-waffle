@@ -43,7 +43,7 @@ class HashTable{
         void displayInfo(){
             cout<<"\n    HASH TABLE       \n";
             cout<<"        PURPOSE??      \n";
-            cout<<" O(1) job lookup by location";
+            cout<<" O(1) job lookup by location\n";
             cout<<"Unique villages: "<<villageToJob.size()<<endl;
             cout<<"Unique district: "<<districtToJob.size()<<endl;
         }
