@@ -8,17 +8,22 @@
 
 using namespace std;
 
+//class of Hash Table ADT..
 class HashTable{
     private:
+        //relating between job to village..
         unordered_map<string,vector<int>> villageToJob;
+        //relating between job to district..
         unordered_map<string,vector<int>> districtToJob;
         int collisions;
 
     public:
+        //constructor..
         HashTable(){
             collisions=0;
         }
 
+        //adding the relations..
         void addJob(const string village,const string district,int jobIds){
             villageToJob[village].push_back(jobIds);
             districtToJob[district].push_back(jobIds);
@@ -40,12 +45,15 @@ class HashTable{
             return vector<int>();
         }
 
+        //About the ADT..
         void displayInfo(){
-            cout<<"\n    HASH TABLE       \n";
-            cout<<"        PURPOSE??      \n";
-            cout<<" O(1) job lookup by location\n";
-            cout<<"Unique villages: "<<villageToJob.size()<<endl;
-            cout<<"Unique district: "<<districtToJob.size()<<endl;
+            cout<<endl;
+            cout<<"\n                 HASH TABLE       \n";
+            cout<<"                 PURPOSE??      \n";
+            cout<<"         O(1) job lookup by location\n";
+            cout<<"                  Unique villages: "<<villageToJob.size()<<endl;
+            cout<<"                  Unique district: "<<districtToJob.size()<<endl;
+            cout<<endl;
         }
 
 };

@@ -6,6 +6,7 @@
 #include <iostream>
 using namespace std;
 
+//structure for job..
 struct Job{
     int jobId;
     string jobType;
@@ -20,6 +21,7 @@ struct Job{
     time_t postedDate;
 };
 
+//structure for worker...
 struct Worker{
     int workerId;
     string name;

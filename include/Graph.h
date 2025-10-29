@@ -10,16 +10,19 @@
 
 using namespace std;
 
+//class for the Graph ADT
 class Graph{
     private:
         unordered_map<string,vector<string>> adjacencyList;
 
     public:
+        //ading edge between two skills..
         void addEdge(const string& skill1,const string& skill2){
             adjacencyList[skill1].push_back(skill2);
             adjacencyList[skill2].push_back(skill1);
         }
 
+        //find the related skills..
         vector<string> RelatedSkills(string& skill){
             vector<string> related;
             set<string> visited;
@@ -45,6 +48,7 @@ class Graph{
             return related;
         }
         
+        //finding prerequisites(helper function)
         void topologicalSort(string& skill,set<string>& visited,vector<string>& stack){
             visited.insert(skill);
 
@@ -57,7 +61,7 @@ class Graph{
             }
             stack.push_back(skill);
         }
-
+        //finding prerequisites..
         vector<string> getLearningPath(string& targetSkill){
             vector<string> path;
             set<string> visited;
@@ -67,23 +71,27 @@ class Graph{
 
             return stack;
         }
-
+        
+        //ABOUT THE ADT..
         void displayInfo(){
-            cout<<"\n Graph Structure:  \n";
-            cout<<" Represenation using Adjacency List \n";
-            cout<<"      PURPOSE??       \n";
-            cout<<" Models relationships between skills for learning paths\n";
-            cout<<"\n Example Related Skills \n";
+            cout<<"\n               Graph Structure:  \n";
+            cout<<"     Represenation using Adjacency List \n";
+            cout<<"                PURPOSE??       \n";
+            cout<<"     Models relationships between skills for learning paths\n";
+            cout<<"\n           Example Related Skills \n";
+            cout<<endl;
             for(auto& pair: adjacencyList){
                 cout<<pair.first<<"->";
                 for(int i=0;i<pair.second.size();i++){
-                    cout<<pair.second[i];
+                    cout<<"    "<<pair.second[i];
                     if(i!=pair.second.size()-1){
                         cout<<", ";
                     }
                 }
                 cout<<endl;
             }
+            cout<<endl;
         }
 };
+
 #endif

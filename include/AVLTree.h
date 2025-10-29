@@ -5,6 +5,7 @@
 #include <vector>
 #include "Structures.h"
 
+//structure for AVLNode
 struct AVLNode{
     double wage;
     vector<int> jobIds;
@@ -21,6 +22,7 @@ struct AVLNode{
     }
 };
 
+//class for AVL TREE with its functions
 class AVLTree{
     private:
         AVLNode* root;
@@ -108,6 +110,7 @@ class AVLTree{
             inOrder(AVLnode->right,result);
         }
 
+        //finding the job in the range..
         void rangeQuery(AVLNode* AVLnode,double minWage,double maxWage,vector<int>& jobIds){
             if(!AVLnode) return;
 
@@ -132,12 +135,14 @@ class AVLTree{
             delete AVLnode;
         }
 
+        //no of nodes in AVL..
         int countAVLNode(AVLNode* AVLnode){
             if(!AVLnode) return 0;
             return 1+countAVLNode(AVLnode->left)+countAVLNode(AVLnode->right);
         }
 
     public:
+        //constructor..
         AVLTree(){
             root=nullptr;
         }
@@ -156,23 +161,26 @@ class AVLTree{
             return result;
         }
 
+        //finding the jobIds
         vector<int> JobrangeQuery(double minWage,double maxWage){
             vector<int> jobIds;
             rangeQuery(root,minWage,maxWage,jobIds);
             return jobIds;
         }  
 
+        //ABOUT THE ADT..
         void displayInfo(){
-            cout<<"     AVL TREE Structure     "<<endl;
-            cout<<"           PURPOSE??        "<<endl;
-            cout<<" Balanced BST to store jobs based on wage "<<endl;
-            cout<<" Insertion in o(log n) time "<<endl;
-            cout<<" Range Query in o(k + log n) time where k is number of jobs in range"<<endl;
-            cout<<" Property: Height-balanced and |BF|<=1 "<<endl;
-            cout<<" Current number of unique wage AVLnodes: "<<countAVLNode(root)<<endl;
-            cout<<" Current height of tree: "<<Height(root)<<endl;
+            cout<<endl;
+            cout<<"             AVL TREE Structure     "<<endl;
+            cout<<"                  PURPOSE??        "<<endl;
+            cout<<"       Balanced BST to store jobs based on wage "<<endl;
+            cout<<"       Insertion in o(log n) time "<<endl;
+            cout<<"       Range Query in o(k + log n) time where k is number of jobs in range"<<endl;
+            cout<<"       Property: Height-balanced and |BF|<=1 "<<endl;
+            cout<<"       Current number of unique wage AVLnodes: "<<countAVLNode(root)<<endl;
+            cout<<"       Current height of tree: "<<Height(root)<<endl;
+            cout<<endl;
         }
-
 };
 
 #endif

@@ -11,10 +11,12 @@
 #include "HashTable.h"
 #include "PriorityQueue.h"
 
+//class for Job Portal..
 class JobPortal{
     private:
         vector<Job> jobs;
 
+        //definig all the data structure..
         JobTrie jobTrie;
         Graph graph;
         JobQueue urgentQueue;
@@ -26,12 +28,14 @@ class JobPortal{
         int nextWorkerId;
     
     public:
+        //constructor..
         JobPortal(){
             nextJobId=1;
             nextWorkerId=1;
             preSeedGraph();
         }
 
+        //pre-loading the relations..
         void preSeedGraph(){
             graph.addEdge("Basic Framing","Seeding");
             graph.addEdge("Plowing", "Tractor Operation");
@@ -44,15 +48,17 @@ class JobPortal{
             graph.addEdge("Painting", "Decorative Painting");
         }
 
+        //all functions for job portal..
         void postJob();
         void registerWorker();
         void demonstrateAllDataStructures();
         void searchJobsByPrefix();
-    void JobsByWageRange();
-    void UrgentJobs();
+        void JobsByWageRange();
+        void UrgentJobs();
         void findRelatedSkills();
         void searchJobsByLocation();
         void displayAllWorkers();
         void setupSampleData();
 };
+
 #endif

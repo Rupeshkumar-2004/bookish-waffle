@@ -1,29 +1,32 @@
 #ifndef TRIENODE_H
 #define TRIENODE_H
 
-#include <unordered_map>
-#include <string>
-#include <vector>
-#include <iostream>
-
+#include<unordered_map>
+#include<string>
+#include<vector>
+#include<iostream>
 using namespace std;
 
+//class for trie ADT..
 class TrieNode{
     public:
+        //mapping...
         unordered_map<char,TrieNode*>edge;
         bool isEndOfWord;
         vector<int> jobIds;
 
+        //constructor..
         TrieNode(){
             isEndOfWord = false;
         }
 };
 
-
+//for job title handling..
 class JobTrie{
     private:
         TrieNode* root;
 
+        //collets the word...
         void collectWords(TrieNode* node,string& prefix,vector<string>& results){
             if(node->isEndOfWord){
                 results.push_back(prefix);
@@ -35,6 +38,8 @@ class JobTrie{
             }
         }
 
+
+        //delete's a node..
         void deleteNode(TrieNode* node){
             if(!node) return;
 
@@ -44,14 +49,17 @@ class JobTrie{
             delete node;
         }
     public:
+        //constructor..
         JobTrie(){
             root=new TrieNode();
         }
 
+        //destructor..
         ~JobTrie(){
             deleteNode(root);
         }
 
+        //insertion..
         void insert(const string word,int jobId){
             TrieNode* current = root;
             for(char ch: word){
@@ -64,6 +72,7 @@ class JobTrie{
             current->jobIds.push_back(jobId);
         }
 
+        //autocompleting..
         vector<string> complete(string& prefix){
             TrieNode* current =root;
             vector<string> results;
@@ -79,6 +88,7 @@ class JobTrie{
             return results;
         }
 
+        //getting the respective ids
         vector<int> getJobIds(string& word){
             TrieNode* current=root;
             for(char ch:word){
@@ -92,15 +102,17 @@ class JobTrie{
             }
             return vector<int>();
         }
-
-
+        
+        //ABOUT THE ADT..
         void displayInfo(){
-            cout<<"\n Trie Structure Info\n";
-            cout<<"       PURPOSE??     \n";
-            cout<<"Fast Prefix-Based Job Search\n";
-            cout<<"       Time Complexity: \n";
-            cout<<"Insertion: O(m) where m= prefix length \n";
-            cout<<"Space Complexity: O(N*M) where N= number of words, M= average length of words\n";
+            cout<<endl;
+            cout<<"\n                 Trie Structure Info\n";
+            cout<<"                      PURPOSE??     \n";
+            cout<<"             Fast Prefix-Based Job Search\n";
+            cout<<"                 Time Complexity: \n";
+            cout<<"         Insertion:O(m) where m=prefix length \n";
+            cout<<"Space Complexity:O(N*M) where N=number of words, M=average length of words\n";
+            cout<<endl;
         }
 
 };

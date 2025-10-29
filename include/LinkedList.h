@@ -6,6 +6,7 @@
 
 using namespace std;
 
+//structure of Node
 struct Node{
     Worker data;
     Node* next;
@@ -18,6 +19,7 @@ struct Node{
     }
 };
 
+//doubly linklist..
 class List{
     private:
         Node* head;
@@ -31,6 +33,7 @@ class List{
             size=0;
         }
 
+        //add a node..
         void addNode(Worker w){
             Node* newNode=new Node(w);
             if(!head){
@@ -44,6 +47,7 @@ class List{
             size++;
         }
 
+        //remove a node
         void removeNode(int workerId){
             Node* current=head;
             while(current){
@@ -66,6 +70,7 @@ class List{
             }
         }
 
+        //search a worker..
         Worker* findWorker(int workerId){
             Node* current=head;
             while(current){
@@ -77,6 +82,7 @@ class List{
             return nullptr;
         }
 
+        //display the list..
         void displayList(){
             Node* current=head;
             while(current){
@@ -85,18 +91,21 @@ class List{
             }
         }
 
+        //returning the size..
         int getSize(){
             return size;
         }
 
+        //LINKED LIST ADT..
         void displayInfo(){
-            std::cout<<"\n  Linked List Structure Info\n";
-            std::cout<<"       PURPOSE     \n";
-            std::cout<<"Dynamic Storage of Worker Records\n";
-            std::cout<<"       Time Complexity: \n";
-            std::cout<<"Insertion: O(1) \n";
-            std::cout<<"Deletion: O(n) \n";
-            std::cout<<"Traversal: O(n) \n";
+            cout<<endl;
+            cout<<"\n          Linked List Structure Info\n";
+            cout<<"                PURPOSE     \n";
+            cout<<"     Dynamic Storage of Worker Records\n";
+            cout<<"            Time Complexity: \n";
+            cout<<"                Insertion: O(1) \n";
+            cout<<"                Deletion: O(n) \n";
+            cout<<"                Traversal: O(n) \n";
         }
 };
 

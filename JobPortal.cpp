@@ -11,30 +11,6 @@ string toLower(string s){
     return s;
 }
 
-// void printDoubleLineBox(const string& title, const vector<string>& lines={}){
-//     const int width=80;
-//     const char TL ='╔',TR='╗',BL='╚',BR='╝';
-//     const char H='═',V='║';
-
-//     string top    =string(1,TL)+string(width,H)+string(1,TR);
-//     cout <<'\n'<<top<<'\n';
-
-//     int padding=(width-(int)title.size())/2;
-//     string titleLine=string(1,V)+string(padding,' ')+title+string(width-title.size()-padding,' ')+string(1,V);
-//     cout<<titleLine<<'\n';
-    
-//     // // Optional content lines
-//     // for (auto& text : lines) {
-//     //     std::string line = text;
-//     //     if ((int)line.size() > width) line = line.substr(0, width); // trim if too long
-//     //     std::cout << V << ' ' << line << std::string(width - line.size() - 1, ' ') << V << '\n';
-//     // }
-
-    
-//     string bottom =string(1,BL)+string(width,H)+string(1,BR);
-//     std::cout << bottom << '\n';
-// }
-
 void JobPortal::postJob(){
     Job job;
     job.jobId =nextJobId++;
@@ -301,7 +277,7 @@ void JobPortal::findRelatedSkills(){
         for(size_t i=0;i<path.size();++i){
             cout<<(i+1)<<". "<<path[i];
             if(i==path.size()-1){
-                cout<<" ← YOUR GOAL";
+                cout<<" → YOUR GOAL";
             }
             cout<<"\n";
         }
@@ -352,8 +328,10 @@ void JobPortal::searchJobsByLocation(){
 
 
 void JobPortal::demonstrateAllDataStructures(){
-    //printDoubleLineBox("ALL DATA STRUCTURES IN THIS PROJECT");
-
+    cout<<"\n╔════════════════════════════════════════════════════════╗\n";
+    cout<<"║     ALL DATA STRUCTURES IN THIS PROJECT               ║\n";
+    cout<<"╚════════════════════════════════════════════════════════╝\n";
+    
     jobTrie.displayInfo();
     graph.displayInfo();
     urgentQueue.displayInfo();
@@ -361,21 +339,24 @@ void JobPortal::demonstrateAllDataStructures(){
     workerslist.displayInfo();
     location.displayInfo();
 
-    vector<string> complexityTable ={
-        "Data Structure      Insert    Search    Delete",
-        "─────────────────────────────────────────────────────",
-        "Trie                O(m)      O(m)      O(m)",
-        "Graph (Adj List)    O(1)      BFS/DFS   O(V+E)",
-        "Priority Queue      O(log n)  O(1)      O(log n)",
-        "AVL Tree            O(log n)  O(log n)  O(log n)",
-        "Doubly Linked List  O(1)*     O(n)      O(n)",
-        "Hash Table          O(1)      O(1)      O(1)"
-    };
+    cout<<"\n╔════════════════════════════════════════════════════════╗\n";
+    cout<<"║     COMPLEXITY ANALYSIS SUMMARY                        ║\n";
+    cout<<"╚════════════════════════════════════════════════════════╝\n";
 
-    //printDoubleLineBox("COMPLEXITY ANALYSIS SUMMARY", complexityTable);
-    cout <<"* Insert at end with tail pointer\n";
-    cout <<"m = string length,n =number of elements\n";
-    cout <<"V =vertices,E =edges\n";
+
+    cout<<"\n┌─────────────────────┬──────────┬──────────┬──────────┐\n";
+    cout<<"│ Data Structure      │ Insert   │ Search   │ Delete   │\n";
+    cout<<"├─────────────────────┼──────────┼──────────┼──────────┤\n";
+    cout<<"│ Trie                │ O(m)     │ O(m)     │ O(m)     │\n";
+    cout<<"│ Graph (Adj List)    │ O(1)     │ BFS/DFS  │ O(V+E)   │\n";
+    cout<<"│ Priority Queue      │ O(log n) │ O(1)     │ O(log n) │\n";
+    cout<<"│ AVL Tree            │ O(log n) │ O(log n) │ O(log n) │\n";
+    cout<<"│ Doubly Linked List  │ O(1)*    │ O(n)     │ O(n)     │\n";
+    cout<<"│ Hash Table          │ O(1)     │ O(1)     │ O(1)     │\n";
+    cout<<"└─────────────────────┴──────────┴──────────┴──────────┘\n";
+    cout<<"* Insert at end with tail pointer\n";
+    cout<<"m = string length, n = number of elements\n";
+    cout<<"V = vertices, E = edges\n";
 }
 
 void JobPortal::setupSampleData() {
